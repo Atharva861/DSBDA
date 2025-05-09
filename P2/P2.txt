@@ -1,0 +1,60 @@
+# File operations and data loading
+import os
+os.getcwd()
+
+import pandas as pd
+df = pd.read_csv('student_performance_data.csv')
+df
+
+# Data shape and overview
+df.shape
+df.head()
+df.tail()
+df.count()
+df.info()
+
+# Null value checks
+df.isnull()
+df.isnull().sum()
+
+# Handling missing data
+print(True + True)  # Demonstration
+df.dropna()
+df.fillna(0)
+df['Age'].fillna('gender')
+df['Absences'].fillna(df['Absences'].mean())
+df['Age'].fillna(df['Age'].median())
+df['Ethnicity'].value_counts()
+df['Ethnicity'].fillna(df['Ethnicity'].mode()[0])
+df.fillna(method='backfill')  # Deprecated warning
+df.fillna(method='pad')       # Deprecated warning
+
+# Statistical summary
+df.describe()
+
+# NumPy operations
+import numpy as np
+x = np.array([12, 45, 7, 8, 25, 39, 50, 3, 16, 98])
+np.mean(x)
+np.median(x)
+
+# Box plot visualization
+import matplotlib.pyplot as plt
+plt.boxplot(x)
+df.plot.box()
+df.loc[6, 'studentId']
+df.loc[6, 'studentId'] = 8385
+df.plot.box()
+
+# Histogram visualization
+df.plot.hist()
+df['Age'].plot.hist()
+
+# Feature scaling
+x = df[['Age', 'studentId']]
+x.describe()
+
+from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler()
+x_scaled = scaler.fit_transform(x)
+pd.DataFrame(x_scaled).describe()
