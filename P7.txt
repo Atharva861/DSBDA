@@ -1,0 +1,48 @@
+import nltk
+nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('wordnet')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('Punkt_tab')
+
+para='Artificial intelligence is rapidly transforming the world we live in. From self-driving cars to virtual assistants, AI is playing a crucial role in shaping the future. However, with this technological advancement comes the responsibility to ensure ethical and unbiased development. Researchers and developers must work together to create systems that are transparent, accountable, and beneficial for all of humanity'
+
+print(para)
+para.split()
+from nltk.tokenize import sent_tokenize
+from nltk.tokenize import word_tokenize
+sent=sent_tokenize (para)
+sent[2]
+words=word_tokenize(para)
+words
+from nltk.corpus import stopwords
+swords=stopwords.words('english')
+swords
+x=[word for word in words if word.lower() not in swords]
+x
+from nltk.stem import PorterStemmer
+ps=PorterStemmer()
+ps.stem('working')
+y=[ps.stem(word) for word in x]
+y
+from nltk.stem import WordNetLemmatizer
+wnl=WordNetLemmatizer()
+wnl.lemmatize('working', pos='v')
+print(ps.stem('went'))
+print(wnl.lemmatize('went', pos='v'))
+z=[wnl.lemmatize(word,pos='v') for word in x]
+z
+import string
+string.punctuation
+t=[word for word in words if word not in string.punctuation]
+t
+from nltk import pos_tag
+pos_tag(t)
+nltk.download('averaged_perceptron_tagger_eng')
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+tfidf=TfidfVectorizer()
+v=tfidf.fit_transform(t)
+v.shape
+import pandas as pd
+pd.DataFrame(v)
