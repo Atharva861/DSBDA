@@ -1,0 +1,37 @@
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('C:/Users/Atharva/Desktop/final/student_data.csv')
+df
+
+df.isnull()
+
+df.describe()
+
+size = df.size
+
+shape = df.shape
+
+df_ndim = df.ndim
+
+series_ndim = df["Name"].ndim
+
+print("Size = {}\nShape = {}\nShape[0] x Shape[1] = {}". 
+       format(size, shape, shape[0]*shape[1]))
+
+print("ndim of DataFrame = {}\nndim of series = {}".
+       format (df_ndim, series_ndim))
+
+dataTypeSeries = df.dtypes
+
+print("Data Type of Each column of Dataframe is:")
+print(dataTypeSeries)
+
+dummies = pd.get_dummies(df.Class)
+
+merged = pd.concat([df, dummies], axis = "columns")
+
+merged.drop(["Class"], axis = "columns")
+
+print(merged)
+
